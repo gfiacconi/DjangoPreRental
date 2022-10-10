@@ -4,12 +4,13 @@ from django import forms
 
 
 class RegisterUserForm(UserCreationForm):
-    email = forms.EmailField(widget=forms.EmailInput(
-        attrs={'class': 'form-control'}))
+    username = forms.CharField(max_length=30, required=True,
+                               help_text='Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.')
+    email = forms.EmailField()
     first_name = forms.CharField(
-        max_length=50, widget=forms.TextInput(attrs={'class': 'form-control'}))
+        max_length=50,)
     last_name = forms.CharField(
-        max_length=50, widget=forms.TextInput(attrs={'class': 'form-control'}))
+        max_length=50,)
 
     class Meta:
         model = User
