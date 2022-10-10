@@ -1,31 +1,31 @@
-from django.shortcuts import render,redirect
+import email
+from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
-def register(request):
+
+def register_user(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            name = form.cleaned_data.get['first_name']
-            surname = form.cleaned_data.get['last_name']
-            email = form.cleaned_data.get['email']
-            password = form.cleaned_data.get['password']
-            user = authenticate(request, name=name, surname=surname, email=email, password=password)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
             login(request, user)
-            messages.success(request, ('New Account Created: ' + name +"!"))
+            messages.success(request, ("Registration Successful! Welcome"+username))
             return redirect('home')
     else:
         form = UserCreationForm()
     return render(request, "authenticate/register.html", 
         {'form': form}
-        )
+        ) 
 
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
-        password = request.POST['password']
+        password = request.POST['password1']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
