@@ -1,1 +1,1 @@
-web: gunicorn PreRental.wsgi
+web: gunicorn PreRental.wsgi --log-file-
