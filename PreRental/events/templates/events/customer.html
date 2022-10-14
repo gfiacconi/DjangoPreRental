@@ -1,0 +1,23 @@
+{% extends 'events/base.html' %}
+{% block content %}
+<body>
+<h1> Family Closet </h1>
+{% for customers in customer %}
+<div class="card" style="width: 18rem;">
+    <img src="" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Closet</h5>
+      <p class="card-text">
+        <ul>
+            <li>
+                {{ customers.first_name }} {{ customers.last_name }}
+            </li>
+            </ul>
+        </p>
+        <a href="#" class="btn btn-primary">Go to your closer</a>
+    </div>
+  </div>
+<br/>
+{% endfor %}
+</body>
+{% endblock %}
